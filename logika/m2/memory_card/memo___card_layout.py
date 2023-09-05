@@ -44,7 +44,7 @@ layout_ans1.addLayout(layout_ans3)
 
 RadioGroupBox.setLayout(layout_ans1)
 
-AnsGroupBox = QGroupBox()
+AnsGroupBox = QGroupBox('Результат тесту')
 lb_result = QLabel('')
 lb_correct = QLabel('')
 
@@ -101,13 +101,13 @@ def show_result():
     ''' показати панель відповідей '''
     RadioGroupBox.hide()
     AnsGroupBox.show()
-    btn_ok.setText("Відповісти")
+    btn_ok.setText("Наступне питання")
 
 
 def show_question():
     ''' показати панель запитань '''
     RadioGroupBox.show()
-    AnsGroupBox.show()
+    AnsGroupBox.hide()
     btn_ok.setText("Відповісти")
 
 

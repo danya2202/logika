@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
         QPushButton, QLabel, QSpinBox)
 
 
-txt_Quastion = QLineEdit('')
+txt_Question = QLineEdit('')
 txt_Answer = QLineEdit('')
 txt_Wrong1 = QLineEdit('')
 txt_Wrong2 = QLineEdit('')
@@ -16,7 +16,7 @@ txt_Wrong3 = QLineEdit('')
 
 layout_form = QFormLayout()
 
-layout_form.addRow('Питання:', txt_Quastion)
+layout_form.addRow('Питання:', txt_Question)
 layout_form.addRow('Правильна відповідь:', txt_Answer)
 layout_form.addRow('НЕ правильний варіант №1:', txt_Wrong1)
 layout_form.addRow('НЕ правильний варіант №2:', txt_Wrong2)
