@@ -26,13 +26,13 @@ win_card = QWidget()
 
 # Тестові данні
 def testlist():
-    frm = Question('Яблуко', 'apple', 'application', 'pinapple', 'apply')
+    frm = Question('Перша компьютерна гра у світі - це...', 'space war', 'tetris', 'doom', 'krestiki noliki')
     questions_listmodel.form_list.append(frm)
-    frm = Question('Дім', 'house', 'horse', 'hurry', 'hour')
+    frm = Question('Якого року був розроблений Python?', '1990', '2001', '1983', '2017')
     questions_listmodel.form_list.append(frm)
-    frm = Question('Мишка', 'mouse', 'mouth', 'muse', 'museum')
+    frm = Question('Для чого бібліотека PyGame?', 'для створення ігор', 'для створення малюнків', 'для створення таблиць', 'для створення вікон')
     questions_listmodel.form_list.append(frm)
-    frm = Question('Число', 'number', 'digit', 'amount', 'summary')
+    frm = Question('Як вимовляється слово Python?', 'Питон', 'Пайтон', 'Путхон', 'Патон')
     questions_listmodel.form_list.append(frm)
 
 # Функції для проведення тесту
