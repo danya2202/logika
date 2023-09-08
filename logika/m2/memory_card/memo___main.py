@@ -23,7 +23,35 @@ timer = QTimer()
 win_main = QWidget()
 win_card = QWidget()
 
+win_main.setStyleSheet('''
+                       background-color: black;
+                       color: white;
+                       border: 2px solid aqua;
+                       font-size: 10px;
+                       ''')
+lb_result.setStyleSheet('margin: 10px')
 
+win_card.setStyleSheet('''
+                       background-color: black;
+                       color: white;
+                       border: 2px solid aqua;
+                       font-size: 10px;
+                       ''')
+
+btn_delete.setStyleSheet('''
+                         background-color: red;
+                         color: black;
+                         ''')
+
+btn_add.setStyleSheet('''
+                         background-color: green;
+                         color: black;
+                         ''')
+
+btn_start.setStyleSheet('''
+                         background-color: yellow;
+                         color: black;
+                         ''')
 # Тестові данні
 def testlist():
     frm = Question('Перша компьютерна гра у світі - це...', 'space war', 'tetris', 'doom', 'krestiki noliki')
