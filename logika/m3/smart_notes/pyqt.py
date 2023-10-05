@@ -27,9 +27,9 @@ btn_note_save = QPushButton('зберегти')
 
 lb_teg = QLabel('')
 
-lst_tags = QListWidget()
 
-lst_text = QTextEdit
+
+lst_text = QListWidget()
 
 layout_notes = QHBoxLayout()
 col1 = QVBoxLayout()
@@ -44,22 +44,33 @@ lst_notes = QListWidget()
 
 btn_tag_seacrh = QPushButton('шукати')
 btn_tag_add = QPushButton('додати')
-btn_tag_delete = QPushButton('видалити')
+btn_tag_unpin = QPushButton('відкріпити')
+
+lb_tags = QLabel('')
+lst_tags = QListWidget()
+field_tag = QLineEdit()
 
 row1 = QHBoxLayout()
 row2 = QHBoxLayout()
+
+
+
+col2.addWidget(lst_text)
 row1.addWidget(btn_note_create)
 row1.addWidget(btn_note_delete)
+row1.addWidget(btn_note_save)
 
-row2
-
+row2.addWidget(lst_tags)
 
 
 
 
 col2.addLayout(row1)
 col2.addLayout(row2)
+col2.addWidget(field_tag)
 col2.addWidget(btn_tag_seacrh)
+col2.addWidget(btn_tag_unpin)
+col2.addWidget(btn_tag_add)
 
 
 def show_notes():
