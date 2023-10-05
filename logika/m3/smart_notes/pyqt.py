@@ -117,12 +117,79 @@ def del_note():
             
             writeToFile()
 
+def add_tag():
+    key = lst_list.currentItem().text()
+    tag = field_tag.text()
+
+    notes[key]['теги'].append(tag)
+    lst_tags.addItem(tag)
+    field_text.clear()
+    writeToFile()
+    
+def del_tag():
+    key = lst_list.currentItem().text()
+    tag = lst_tags.currentItem().text()
+
+    notes[key]['теги'].remove(tag)
+    
+    lst_tags.clear()
+    lst_tags.addItems(notes[key]['теги'])
+    
+    writeToFile()
+    
+def search_tag():
+    tag = field_tag.text()
+    
+    if btn_tag_seacrh.text() == 'шукати':
+        filtered_notes = {}
+        
+        for key in notes:
+            if tag in notes[key]['теги']:
+                filtered_notes[key] = notes[key]
+                
+                
+        btn_tag_seacrh.setText('скинути пошук')
+        
+        lst_list.clear()
+        lst_list.addItems(filtered_notes)
+        lst_tags.clear()
+                
+    elif btn_tag_seacrh.text() == 'скинути пошук':
+        btn_tag_seacrh.setText('скинути пошук')
+        lst_list.clear()
+        lst_tags.clear()
+        field_tag.clear()
+        
+        lst_list.addItems(notes)
+        btn_tag_seacrh.setText('шукати')
+        
+        
+btn_tag_add.clicked.connect(add_tag)
+btn_tag_seacrh.clicked.connect(search_tag)
+btn_tag_unpin.clicked.connect(del_tag)
+
 lst_list.itemClicked.connect(show_notes)   
 
 btn_note_create.clicked.connect(add_note)
 btn_note_save.clicked.connect(save_note)
 btn_note_delete.clicked.connect(del_note)
 lst_list.addItems(notes)
+
+
+
+btn_note_create.setStyleSheet('''
+                              background-color: green;
+                              color: white;
+                              ''')
+btn_note_save.setStyleSheet('''
+                              background-color: yellow;
+                              color: white;
+                              ''')
+btn_note_delete.setStyleSheet('''
+                              background-color: red;
+                              color: white;
+                              ''')
+
 
 
 window.setLayout(layout_notes)
