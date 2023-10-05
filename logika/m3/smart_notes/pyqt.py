@@ -64,9 +64,9 @@ col2.addWidget(lst_tags)
 
 
 col2.addWidget(field_tag)
+row2.addWidget(btn_tag_add)
 row2.addWidget(btn_tag_seacrh)
 row2.addWidget(btn_tag_unpin)
-row2.addWidget(btn_tag_add)
 col2.addLayout(row2)
 
 def show_notes():
@@ -114,7 +114,7 @@ def del_note():
             field_text.clear()
             lst_list.clear()
             lst_tags.clear()
-            
+            lst_list.addItems(notes)
             writeToFile()
 
 def add_tag():
@@ -178,19 +178,49 @@ lst_list.addItems(notes)
 
 
 btn_note_create.setStyleSheet('''
-                              background-color: green;
-                              color: white;
-                              ''')
+                     background-color: gray;
+                     color: black;
+                     ''')
 btn_note_save.setStyleSheet('''
-                              background-color: yellow;
-                              color: white;
-                              ''')
+                     background-color: gray;
+                     color: black;
+                     ''')
 btn_note_delete.setStyleSheet('''
-                              background-color: red;
-                              color: white;
-                              ''')
+                     background-color: gray;
+                     color: black;
+                     ''')
+btn_tag_add.setStyleSheet('''
+                     background-color: gray;
+                     color: black;
+                     ''')
+btn_tag_seacrh.setStyleSheet('''
+                     background-color: gray;
+                     color: black;
+                     ''')
+btn_tag_unpin.setStyleSheet('''
+                     background-color: gray;
+                     color: black;
+                     ''')
 
-
+window.setStyleSheet('''
+                     background-color: darkgrey;
+                     color: black;
+                     ''')
+lst_list.setStyleSheet('''
+                       background-color: silver;
+                       color: black;
+                       ''')
+lst_tags.setStyleSheet('''
+                       background-color: silver;
+                       color: black;
+                       ''')
+field_text.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+field_tag.setStyleSheet('''
+                       background-color: silver;
+                       color: black;
+                       ''')
 
 window.setLayout(layout_notes)
 window.show()
