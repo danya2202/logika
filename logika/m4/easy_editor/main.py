@@ -55,7 +55,34 @@ def filter(filenames):
         if file.split('.')[-1] in ext:
             result.append(file)
             
-    return result 
+    return result
+
+btn_folder.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+btn_leftrot.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+btn_rightrot.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+btn_riz.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+btn_BlWh.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+btn_flip.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+lst_file.setStyleSheet('''
+                         background-color: silver;
+                         ''')
+window.setStyleSheet('''
+                         background-color: gray;
+                         ''')
+
+ 
 filter(files)    
 
 
