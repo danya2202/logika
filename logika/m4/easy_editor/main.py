@@ -43,10 +43,10 @@ col2.addLayout(rov)
 layout_editor.addLayout(col1, 1)
 layout_editor.addLayout(col2, 4)
 
-workdir = QFileDialog.getExistingDirectory()
 
-files = os.listdir(workdir)
-print(workdir)
+
+
+
 def filter(filenames):
     result = []
     ext = ['png', 'jpg', 'bmp', 'jpeg', 'gif']
@@ -56,6 +56,66 @@ def filter(filenames):
             result.append(file)
             
     return result
+
+def showFiles():
+    global workdir
+    workdir = QFileDialog.getExistingDirectory()
+    files = os.listdir(workdir)
+    
+    graphic_files = filter(files)
+
+    lst_file.clear()
+    lst_file.addItems(graphic_files)
+
+class ImageProcessor():
+    def __init__(self):
+        self.original = None
+        self.filename = None
+        self.save_dir = 'Modifided/'
+
+    def load_image(self, filename):
+        self.filename = filename
+        
+        full_path = os.path.join(workdir, filename)
+        
+        self.original = Image.open(full_path)
+
+    def show_image(self, path):
+        lb_pic.hide()
+            
+        pixmapimage = QPixmap(path)
+        w, h = lb_pic.width(), lb_pic.height()
+            
+        pixmapimage = pixmapimage.scaled(w, h, Qt.KeepAspectRatio)
+            
+        lb_pic.setPixmap(pixmapimage)
+            
+        lb_pic.show()
+    
+    def saveAndShowImage(self):
+        path = os.path.join(workdir, self.save_dir)
+
+        if not (os.path.exists(path) or os.path.isdir(path)):
+            os.mkdir(path)
+
+        
+        image_path = os.path.join(path, self.filename)
+        self.original.save(image_path)
+        self.show_image(image_path)
+
+def showChosenItem():
+    filename = lst_file.currentItem().text()
+    workimage.load_image(filename)
+    full_path = os.path.join(workdir, filename)
+    workimage.show_image(full_path)
+    
+workimage = ImageProcessor()
+
+lst_file.currentRowChanged.connect(showChosenItem)
+
+
+
+
 
 btn_folder.setStyleSheet('''
                          background-color: silver;
@@ -82,8 +142,8 @@ window.setStyleSheet('''
                          background-color: gray;
                          ''')
 
- 
-filter(files)    
+
+    
 
 
 
@@ -135,14 +195,7 @@ filter(files)
 
 
 
-
-
-
-
-
-
-
-
+btn_folder.clicked.connect(showFiles)
 
 window.setLayout(layout_editor)
 window.show()
