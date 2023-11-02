@@ -102,7 +102,32 @@ class ImageProcessor():
         image_path = os.path.join(path, self.filename)
         self.original.save(image_path)
         self.show_image(image_path)
-
+        
+    def do_bw(self):
+        self.original = self.original.convert("L")
+        self.saveAndShowImage()  
+        
+    def do_left(self):
+        self.original = self.original.transpose(Image.ROTATE_90)
+        self.saveAndShowImage()
+    
+    def do_right(self):
+        self.original = self.original.transpose(Image.ROTATE_270)
+        self.saveAndShowImage()
+    
+    def do_flip(self):
+        self.original = self.original.transpose(Image.FLIP_LEFT_RIGHT)
+        self.saveAndShowImage()
+    
+    def do_sharp(self):
+        self.original = self.original.filter(ImageFilter.SHARPEN)
+        self.saveAndShowImage()
+    
+        
+        
+        
+        
+             
 def showChosenItem():
     filename = lst_file.currentItem().text()
     workimage.load_image(filename)
@@ -111,7 +136,7 @@ def showChosenItem():
     
 workimage = ImageProcessor()
 
-lst_file.currentRowChanged.connect(showChosenItem)
+lst_file.itemClicked.connect(showChosenItem)
 
 
 
@@ -190,12 +215,14 @@ window.setStyleSheet('''
 
 
 
-
-
-
-
-
+btn_riz.clicked.connect(workimage.do_sharp)
+btn_flip.clicked.connect(workimage.do_flip)
+btn_leftrot.clicked.connect(workimage.do_left)
+btn_rightrot.clicked.connect(workimage.do_right)
+btn_BlWh.clicked.connect(workimage.do_bw)
 btn_folder.clicked.connect(showFiles)
+
+window.resize(900,600)
 
 window.setLayout(layout_editor)
 window.show()
