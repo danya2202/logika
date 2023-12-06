@@ -70,16 +70,21 @@ window = display.set_mode((700, 500))
 background = scale(load('background.jpg'), (win_width, win_height))
 
 player = Player('hero.png', 5, 420, 4)
-monster = Enemy('cyborg.png', 620, 300, 2)
+monster = Enemy('cyborg.png', 610, 300, 3)
 
 treasure = GameSprite('treasure.png', 620, 420, 0)
 
-wall_1 = Wall(150, 150, 25, 250)
-wall_2 = Wall(250, 200, 25, 190)
+wall_1 = Wall(150, 200, 25, 200)
+wall_2 = Wall(250, 310, 25, 250)
+wall_3 = Wall(150, 200, 200, 25)
+wall_4 = Wall(200, 200, 200, 25)
+wall_5 = Wall(400, 200, 25, 190)
+wall_6 = Wall(550, 300, 25, 250)
+wall_7 = Wall(400, 200, 300, 25)
+wall_8 = Wall(150, -100, 25, 400)
 
 
-
-walls = [wall_1, wall_2]
+walls = [wall_1, wall_2, wall_3, wall_4, wall_5, wall_6, wall_7, wall_8]
 
 game = True
 finish = False
@@ -94,6 +99,7 @@ lose = f.render('YOU LOSE!',False, (255, 0, 0))
 mixer.init()
 mixer.music.load("jungles.ogg")
 
+junk_sound = mixer.Sound('jungles.ogg')
 money_sound = mixer.Sound('money.ogg')
 kick_sound = mixer.Sound('kick.ogg')
 
@@ -106,27 +112,32 @@ while game:
         
         window.blit(background, (0, 0))        
         player.reset()        
-        monster.reset()        
+                
         treasure.reset()        
         for wall in walls:
-            wall.reset()    
+            wall.reset()
+        monster.reset()    
         player.update()        
         monster.update()        
-            
+        junk_sound.play()    
+        
         if sprite.collide_rect(player, treasure):    
             finish = True
             window.blit(win, (250, 250))
+            junk_sound.stop()
             money_sound.play()
         
         if sprite.collide_rect(player, monster):    
             finish = True
             window.blit(lose, (250, 250))
+            junk_sound.stop()
             kick_sound.play()
         
         for wall in walls:
             if sprite.collide_rect(player, wall):    
                 finish = True
                 window.blit(lose, (250, 250))
+                junk_sound.stop()
                 kick_sound.play()
             
          
