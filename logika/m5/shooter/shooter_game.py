@@ -72,6 +72,9 @@ for i in range(5):
 font.init()
 font1 = font.SysFont('Arial', 36)
 
+font2 = font.SysFont('Arial', 80)
+txt_lose_game = font2.render('Ти програв!!!!', True, (255, 0, 0))
+txt_win_game = font2.render('Ти виграв!!!!', True, (0, 255, 0))
 
 
 window = display.set_mode((win_width, win_height))
@@ -86,7 +89,6 @@ lost = 0
 score = 0
 FPS = 60
 
-
 while game:
     for e in event.get():
         if e.type == QUIT:
@@ -95,9 +97,10 @@ while game:
             if e.key == K_SPACE:
                rocket.fire() 
                fire_sound.play()
+
     if not finish:
         window.blit(background, (0, 0))
-        rocket.reset()
+        
         txt_lose = font1.render(f'Пропущено: {lost}', True, (255,255,255))
         window.blit(txt_lose, (10, 50))
         
@@ -110,8 +113,40 @@ while game:
         bullets.draw(window)
         bullets.update()           
             
-            
+        rocket.reset()    
         rocket.update()
+        
+        
+        if sprite.spritecollide(rocket, monsters, False):
+            finish = True
+            window.blit(txt_lose_game, (200, 200))
+        
+        
+        collides = sprite.groupcollide(monsters, bullets, True, True)
+        for c in collides:
+            mon = Enemy('ufo.png', randint(0, win_width-80), 0, 80, 50, randint(1, 5))
+            monsters.add(mon) 
+            score = score + 1
+            
+        if score == 10:
+            finish = True
+            window.blit(txt_win_game, (200, 200))
     
+    else:
+        finish = False
+        score = 0
+        lost = 0
+       
+        for b in bullets:
+            b.kill()
+            
+        for m in monsters:
+            m.kill()
+         
+        time.delay(3000)
+        for i in range(5):
+            mon = Enemy('ufo.png', randint(0, win_width-80), 0, 80, 50, randint(1, 5))
+            monsters.add(mon)
+        
     display.update()
     clock.tick(FPS)
